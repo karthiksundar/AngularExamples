@@ -1,22 +1,26 @@
 import {Component} from 'angular2/core';
+import {ContactListComponent} from './contactlist.component'
+
 
 @Component({
     selector: 'twowaybinding',
-    template: `<div >My age is {{age}}</div>
-    	<input [(ngModel)]="age" />
-    	`
+    template: `
+    	<contactlist [contacts] = "contacts"></contactlist>
+    	<button (click)="onSelect(contact)">Set Model</button>
+    	`,
+    	directives : [ContactListComponent]
 })
 
 export class TwowaybindingComponent implements OnInit {
 
-    public age;
+    public contacts;
 
-    onSelect(ageValue) {
-        this.age = ageValue;
+    onSelect(contact) {
+        console.log(this.contacts);
     }
 
     ngOnInit() {
-        this.onSelect(27);
+        this.contacts = [{ name: 'KS', age: 27 }, { name: 'SP', age: 25 }];
     }
 
 }
